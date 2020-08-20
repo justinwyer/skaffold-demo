@@ -1,0 +1,31 @@
+Vagrant.configure("2") do |config|
+    config.vm.define :skaffold do |skaffold|
+      skaffold.vm.box = "bento/ubuntu-18.04"
+      skaffold.vm.network "forwarded_port", guest: 80, host: 8080, host_ip: "127.0.0.1"
+
+      skaffold.ssh.forward_agent = true
+
+      skaffold.vm.network "private_network", type: "dhcp", virtualbox__intnet: true
+
+      skaffold.vm.synced_folder "../", "/home/vagrant/src"
+
+      skaffold.vm.provider "virtualbox" do |v|
+        v.gui = false
+        v.memory = "8192"
+        v.cpus = 4
+      end
+
+      skaffold.vm.provider "hyperv" do |v|
+        v.gui = false
+        v.memory = "8192"
+        v.cpus = 4
+      end
+
+      skaffold.vm.provider "parallels" do |v|
+        v.memory = "8192"
+        v.cpus = 4
+      end
+
+      skaffold.vm.provision "shell", path: "linux-ubuntu-setup.sh", args: "vagrant"
+    end
+  end

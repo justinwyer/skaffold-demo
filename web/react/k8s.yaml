@@ -1,0 +1,48 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-demo
+spec:
+  selector:
+    matchLabels:
+      app: react-demo
+  template:
+    metadata:
+      labels:
+        app: react-demo
+    spec:
+      containers:
+      - name: react-demo
+        image: skaffold-demo/react
+        ports:
+        - containerPort: 3000
+        tty: true
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: react-demo
+spec:
+  selector:
+    app: react-demo
+  ports:
+  - port: 80
+    targetPort: 3000
+    protocol: TCP
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: react-demo
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /react/$1
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /react/(.*)
+        backend:
+          serviceName: react-demo
+          servicePort: 80
