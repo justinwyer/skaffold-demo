@@ -13,10 +13,6 @@ spec:
       labels:
         app: spring-demo
     spec:
-      initContainers:
-        - name: wait-for-mysql
-          image: mysql
-          command: ['sh', '-c', 'until mysql -h mysql -u skaffold -ppassword -e "use quotes"; do sleep 5; done']
       containers:
         - name: spring-demo
           image: skaffold-demo/spring

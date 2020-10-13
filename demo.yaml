@@ -5,13 +5,17 @@ build:
     push: false
   artifacts:
     - image: skaffold-demo/spring
-      context: api/spring
+      context: api/jdk/spring
       jib:
-        project: api:spring
+        project: jdk:spring
     - image: skaffold-demo/micronaut
-      context: api/micronaut
+      context: api/jdk/micronaut
       jib:
-        project: api:micronaut
+        project: jdk:micronaut
+    - image: skaffold-demo/node
+      context: api/node
+      docker:
+        dockerfile: Dockerfile
     - image: skaffold-demo/angular
       context: web/angular
       docker:
@@ -33,7 +37,8 @@ deploy:
     manifests:
       - k8s-mysql.yaml
       - k8s-shared-environment.yaml
-      - api/spring/k8s.yaml
-      - api/micronaut/k8s.yaml
+      - api/jdk/spring/k8s.yaml
+      - api/jdk/micronaut/k8s.yaml
+      - api/node/k8s.yaml
       - web/angular/k8s.yaml
       - web/react/k8s.yaml

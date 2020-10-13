@@ -18,7 +18,7 @@ repositories {
 }
 
 dependencies {
-	implementation(project(":api:shared"))
+	implementation(project(":jdk:shared"))
 	implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
 	implementation("org.springframework.boot:spring-boot-starter-webflux")
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
@@ -28,6 +28,7 @@ dependencies {
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	implementation("org.jetbrains.kotlinx:kotlinx-coroutines-reactor")
 	runtimeOnly("mysql:mysql-connector-java:8.0.19")
+	runtimeOnly("com.oracle.database.jdbc:ojdbc8:19.7.0.0")
 	testImplementation("org.springframework.boot:spring-boot-starter-test") {
 		exclude(group = "org.junit.vintage", module = "junit-vintage-engine")
 	}

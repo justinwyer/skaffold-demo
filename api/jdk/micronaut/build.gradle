@@ -20,7 +20,7 @@ configurations {
 }
 
 dependencies {
-    implementation project(":api:shared")
+    implementation project(":jdk:shared")
     kapt(platform("io.micronaut:micronaut-bom:$micronautVersion"))
     kapt("io.micronaut:micronaut-inject-java")
     kapt("io.micronaut:micronaut-validation")

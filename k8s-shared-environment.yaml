@@ -1,9 +1,0 @@
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: shared-environment
-data:
-  SPRING_PROFILES_ACTIVE: skaffold
-  SPRING_DATASOURCE_USERNAME: skaffold
-  SPRING_DATASOURCE_PASSWORD: password
